@@ -1,0 +1,46 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: grey;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  text-decoration: underline;
+}
+
+#canvas {
+  display: block;
+  margin: 20px auto;
+  background-color: white;
+  border: 5px solid black;
+  cursor: crosshair;
+}
+
+
+.toolbox {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button, input {
+  margin: 5px;
+  padding: 0; 
+}
+
+button img {
+  width: 20px; 
+  height: auto;
+}
+
+#colorsCatalog {
+  display: none;
+}
+
+#colorsButton {
+  cursor: pointer;
+}
