@@ -4,7 +4,7 @@ let isDrawing = false;
 let undoStack = [];
 let redoStack = [];
 let selectedTool = 'pen';
-let selectedColor = '#000000';
+let selectedColor = 'black';
 
 const undoButton = document.getElementById('undoButton');
 const redoButton = document.getElementById('redoButton');
@@ -26,15 +26,15 @@ window.addEventListener('DOMContentLoaded', () => {
   const colorsButton = document.getElementById('colorsButton');
   const colorsInput = document.getElementById('colors');
 
-  colorsCatalog.style.display = 'none';
-
   const ctx = canvas.getContext('2d');
 
   ctx.strokeStyle = selectedColor;
+  context.lineCap = 'round';
 
-  colorsButton.addEventListener('click', () => {
-    colorsInput.click();
-  });
+colorsButton.addEventListener('click', () => {
+  colorsInput.click();
+  colorsInput.style.display = colorsCatalog.style.display === 'none' ? 'block' : 'none';
+});
 
   colorsInput.addEventListener('change', () => {
     selectedColor = colorsInput.value;
@@ -48,10 +48,6 @@ window.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadButton');
-
-  const ctx = canvas.getContext('2d');
-
-
 
   downloadButton.addEventListener('click', () => {
     const dataURL = canvas.toDataURL('image/png');
@@ -68,12 +64,12 @@ function startDrawing(event) {
   isDrawing = true;
   draw(event);
 }
-
 function draw(event) {
   if (!isDrawing) return;
 
-  const x = event.clientX - canvas.offsetLeft;
-  const y = event.clientY - canvas.offsetTop;
+  const rect = canvas.getBoundingClientRect();
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
 
   if (selectedTool === 'pen') {
     context.lineWidth = 5;
@@ -84,14 +80,12 @@ function draw(event) {
     context.beginPath();
     context.moveTo(x, y);
   } else if (selectedTool === 'eraser') {
-    context.clearRect(x, y, 20, 20);
+    context.clearRect(x, y, 30, 30);
   }
 
   const currentState = context.getImageData(0, 0, canvas.width, canvas.height);
   undoStack.push(currentState);
   redoStack = [];
-
-  updateUndoRedoButtons();
 }
 
 function stopDrawing() {
@@ -106,8 +100,6 @@ function undo() {
   } else {
     clearCanvas();
   }
-
-  updateUndoRedoButtons();
 }
 
 function redo() {
@@ -115,8 +107,6 @@ function redo() {
     context.putImageData(redoStack[redoStack.length - 1], 0, 0);
     undoStack.push(redoStack.pop());
   }
-
-  updateUndoRedoButtons();
 }
 
 function setToolToPen() {
@@ -126,22 +116,12 @@ function setToolToPen() {
 
 function setToolToErase() {
   selectedTool = 'eraser';
-  canvas.style.cursor = 'default';
+  canvas.style.cursor = 'crosshair';
 }
 
 function setColor(event) {
   selectedColor = event.target.value;
-}
-
-function colorFill() {
-  context.fillStyle = selectedColor;
-  context.fillRect(0, 0, canvas.width, canvas.height);
-}
-
-
-function updateUndoRedoButtons() {
-  undoButton.disabled = undoStack.length === 1;
-  redoButton.disabled = redoStack.length === 0;
+  canvas.style.cursor = 'crosshair';
 }
 
 

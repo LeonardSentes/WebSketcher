@@ -2,43 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="This website downloads videos and images from social media">
     <title>Web Sketcher</title>
     <link rel="icon" href="img/drawing.jpg" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
-  <body>
+<body>
     <main>
-    <h1>Online Drawing Board</h1>
-    <div class="toolbox">
-      <button id="undoButton" disabled title="Undo">
-        <img src="img/undo.png" alt="Undo">
-      </button>
-      <button id="redoButton" disabled title="Redo">
-        <img src="img/redo.png" alt="Redo">
-      </button>
-      <button id="downloadButton" title="Download">
-        <img src="img/download.png" alt="Download">
-      </button>
-      <button id="eraserButton" title="Eraser">
-        <img src="img/eraser.png" alt="Eraser">
-      </button>
-      <button id="penButton" title="Pen">
-        <img src="img/pen.png" alt="Pen">
-      </button>
-      </button>
-        <div id="colorsCatalog">
-          <input type="color" title="Colors" id="colors">
+        <h1>Online Drawing Board</h1>
+        <div class="toolbox">
+            <button id="undoButton" type="button">
+                <img src="img/undo.png" alt="Undo">
+            </button>
+            <button id="redoButton" type="button">
+                <img src="img/redo.png" alt="Redo">
+            </button>
+            <button id="downloadButton" type="button">
+                <img src="img/download.png" alt="Download">
+            </button>
+            <button id="eraserButton" type="button">
+                <img src="img/eraser.png" alt="Eraser">
+            </button>
+            <button id="penButton" type="button">
+                <img src="img/pen.png" alt="Pen">
+            </button>
+            <button id="colorsButton" type="button">
+                <img src="img/colors.png" alt="Colors">
+            </button>
         </div>
-        <button id="colorsButton">
-          <img src="img/colors.png" alt="Colors">
-        </button>
-      </main>
-    <canvas id="canvas" width="800" height="600"></canvas>
+        <div id="colorsCatalog">
+            <input type="color" id="colors" aria-label="Choose a color">
+        </div>
+        <canvas id="canvas" width="800" height="600"></canvas>
+    </main>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
-
-  
