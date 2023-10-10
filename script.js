@@ -20,31 +20,27 @@ redoButton.addEventListener('click', redo);
 penButton.addEventListener('click', setToolToPen);
 eraserButton.addEventListener('click', setToolToErase);
 
-window.addEventListener('DOMContentLoaded', () => {
-  
-  const colorsCatalog = document.getElementById('colorsCatalog');
-  const colorsButton = document.getElementById('colorsButton');
-  const colorsInput = document.getElementById('colors');
 
+window.addEventListener('DOMContentLoaded', () => {
+  const colorsButton = document.getElementById('colorsButton');
+  const canvas = document.getElementById('canvas');
   const ctx = canvas.getContext('2d');
 
   ctx.strokeStyle = selectedColor;
-  context.lineCap = 'round';
+  ctx.lineCap = 'round';
 
-colorsButton.addEventListener('click', () => {
-  colorsInput.click();
-  colorsInput.style.display = colorsCatalog.style.display === 'none' ? 'block' : 'none';
-});
+  colorsButton.addEventListener('click', () => {
+    const colorInput = document.createElement('input');
+    colorInput.type = 'color';
 
-  colorsInput.addEventListener('change', () => {
-    selectedColor = colorsInput.value;
-    
-    console.log('Selected Color:', selectedColor);
+    colorInput.click();
 
-    ctx.strokeStyle = selectedColor;
+    colorInput.addEventListener('input', (event) => {
+      selectedColor = event.target.value;
+      ctx.strokeStyle = selectedColor;
+    });
   });
 });
-
 
 window.addEventListener('DOMContentLoaded', () => {
   const downloadButton = document.getElementById('downloadButton');
